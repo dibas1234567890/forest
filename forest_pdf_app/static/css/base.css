@@ -1,0 +1,10 @@
+.jsign-wrapper{
+    border: solid 1px;
+    border-color: #007bff;
+  }
+
+#jsign_DFO_officer_signature{
+    border: solid 1px;
+    border-color: #007bff;
+    height: 200px;
+  }

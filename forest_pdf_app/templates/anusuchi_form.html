@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %} Form{% endblock %} </title>
+    
+    
+</head> 
+{% block content %}
+{% include 'header.html' %}
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Details
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post" id="details_form"   enctype="multipart/form-data">
+                            {% csrf_token %}
+
+                            <table>
+                                {{ details_form.as_table }}  
+                            </table>
+                            
+                            <button type="submit">Submit Details</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header text-center">
+                        Form
+                    </div>
+                    <div class="card-body">
+                        {{ anusuchi_form.media }}
+
+                        <form action="" method="post" id="details_form"   >
+                            {% csrf_token %}
+
+                            <table>
+                                {{ anusuchi_form.as_table }}  
+                            </table>
+                            
+                            <button type="submit">Submit Form</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
+
+
+</body>
+
+{% endblock %}
+
+</html>
