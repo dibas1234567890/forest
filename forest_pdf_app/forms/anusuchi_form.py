@@ -4,7 +4,7 @@ from jsignature.widgets import JSignatureWidget
 from forest_pdf_app.models import AnushuchiFourteen
 
 class AnusuchiForm(forms.ModelForm):
-    DFO_officer_signature = JSignatureField(widget=JSignatureWidget(jsignature_attrs={"height":'30px' ,'color': '#489755', 'border':'solid', 'ResetButton':'green'}))
+    DFO_officer_signature = JSignatureField(widget=JSignatureWidget(jsignature_attrs={"color":"#CCC"}))
 
 
     class Meta:

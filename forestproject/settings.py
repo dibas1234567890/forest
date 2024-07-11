@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+from rest_framework.permissions import *
 import os
 from pathlib import Path
 
@@ -41,13 +41,17 @@ INSTALLED_APPS = [
     'forest_pdf_app',
     'djangonepal',
     'django_extensions',
-        'jsignature',
-            "bootstrap5",
+    'jsignature',
+    "bootstrap5", 
+    'rest_framework',
+    'corsheaders',
 
 
 ]
 
 MIDDLEWARE = [
+        'corsheaders.middleware.CorsMiddleware',
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -140,4 +144,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 MEDIA_URL = '/mediafiles/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.AllowAny']}
 

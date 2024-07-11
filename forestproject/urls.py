@@ -19,5 +19,5 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('forest_pdf_app.urls'))
+    path('api/', include('forest_pdf_app.urls'))
 ]
