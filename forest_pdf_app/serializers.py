@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from forest_pdf_app.models import AnushuchiFourteen
+from forest_pdf_app.models import AnushuchiFourteen, Details
 
 class AnusuchiSerializer(serializers.ModelSerializer):
     class Meta: 
@@ -12,3 +12,7 @@ class AnusuchiSerializer(serializers.ModelSerializer):
                   'days_to_pick_up', 'last_date_to_pick_up', 'cc_division_forest_office',
                   'cc_sub_division_forest_office', 'cc_finance_dept_division_forest_office', 'DFO_officer_signature']
 
+class DetailSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Details
+        fields = "__all__"

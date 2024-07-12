@@ -6,52 +6,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %} Form{% endblock %} </title>
-    
-    
-</head> 
+    <title>Document</title>
+</head>
 {% block content %}
 {% include 'header.html' %}
-
 <body>
-    <h1>
-        <strong>
-            {{ api_data }}
-        </strong>
-    </h1>
-  
-
     <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header text-center">
-                        Form
+                        Details
                     </div>
                     <div class="card-body">
-                        {{ anusuchi_form.media }}
-
-                        <form action="" method="post" id="details_form"   >
+                        <form action="" method="post" id="details_form"   enctype="multipart/form-data">
                             {% csrf_token %}
 
                             <table>
-                                {{ anusuchi_form.as_table }}  
+                                {{ detail_form.as_table }}  
                             </table>
                             
-                            <button type="submit">Submit Form</button>
+                            <button type="submit">Submit Details</button>
                         </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
- 
-
-
 </body>
-
-{% endblock %}
-
+{%  endblock %}
 </html>

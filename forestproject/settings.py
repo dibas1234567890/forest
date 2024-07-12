@@ -148,4 +148,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 CORS_ORIGIN_ALLOW_ALL = True
 
 REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.AllowAny']}
-
+DATE_FORMAT = "Y-m-d"

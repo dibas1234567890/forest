@@ -4,7 +4,28 @@ from jsignature.widgets import JSignatureWidget
 from forest_pdf_app.models import AnushuchiFourteen
 
 class AnusuchiForm(forms.ModelForm):
-    DFO_officer_signature = JSignatureField(widget=JSignatureWidget(jsignature_attrs={"color":"#CCC"}))
+    DFO_officer_signature = JSignatureField(widget=JSignatureWidget(jsignature_attrs={"color":"#000"}))
+    date = forms.DateField(required=False, widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+        input_formats=["%Y-%m-%d"]
+    )
+    notice_published_date  =  forms.DateField(required=False, widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+        input_formats=["%Y-%m-%d"]
+    )
+    
+    decision_date = forms.DateField(required=False, widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+        input_formats=["%Y-%m-%d"]
+    )
+    last_date_to_receive = forms.DateField(required=False, widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+        input_formats=["%Y-%m-%d"]
+    )
+
+    measured_date = forms.DateField(required=False, widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+        input_formats=["%Y-%m-%d"]
+    )
+    last_date_to_pick_up =     forms.DateField(required=False, widget=forms.DateInput(format="%Y-%m-%d", attrs={"type": "date"}),
+        input_formats=["%Y-%m-%d"]
+    )
+
 
 
     class Meta:
