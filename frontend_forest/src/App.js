@@ -1,11 +1,13 @@
 import React from 'react';
 import DetailForm from './detail_form';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const App = () => {
     return (
         <div>
-            <h1>My Form</h1>
-            <DetailForm />
+            <Router>
+                <Routes path = 'api/detail_form' element = {<DetailForm/>}/>
+            </Router>
         </div>
     );
 };
