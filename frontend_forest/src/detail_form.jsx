@@ -31,10 +31,10 @@ const DetailForm = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            setLoading(true);
+            setLoading(false);
             const csrfToken = await getCsrfToken();
             if (!csrfToken) {
-                setLoading(false);
+                setLoading(true);
                 return;
             }
 
@@ -65,9 +65,19 @@ const DetailForm = () => {
         fetchData();
     }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        axios.post('http://127.0.0.1:8000/api/detail_form', formData)
+
+        const response = await axios.get('http://127.0.0.1:8000/api/csrf_token', {
+            withCredentials: true});
+        const csrfToken = response.data.csrfToken
+
+        axios.post('http://127.0.0.1:8000/api/detail_form', formData, {
+            headers: {
+                'X-CSRFToken': csrfToken
+            },
+            withCredentials: true
+        })
             .then(response => {
                 console.log(response.data);
                 setformData({   wood_species: '',
@@ -182,7 +192,7 @@ const DetailForm = () => {
                                     onChange={handleChange}
                                     required
                                 >
-                                    <option value="">Select an option</option>
+                                    
                                     {options.map(option => (
                                         <option key={option.id} value={option.id}>
                                             {option.anusuchi_cha_no}

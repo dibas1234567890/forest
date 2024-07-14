@@ -59,7 +59,7 @@ class AnushuchiFourteen(models.Model):
     cc_division_forest_office = models.CharField( max_length=50) 
     cc_sub_division_forest_office = models.CharField( max_length=50) 
     cc_finance_dept_division_forest_office = models.CharField( max_length=50) 
-    DFO_officer_signature = JSignatureField()
+    DFO_officer_signature = models.TextField(null=True, blank=True)
 
     user = models.ForeignKey(User,  on_delete=models.CASCADE)
 
