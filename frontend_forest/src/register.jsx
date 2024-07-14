@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import  { Navigate, Route, useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
     const [error, setError] = useState('');
@@ -9,6 +9,7 @@ const RegisterForm = () => {
          email:'', 
          password:''
     })
+    const nav = useNavigate();
 
     const [searchString, setSearchString] = useState();
 
@@ -26,18 +27,14 @@ const RegisterForm = () => {
 
         const response = await axios.post('http://127.0.0.1:8000/api/register', formData)
         .then(response => {
-            console.log(response.data) 
-                setformData({
-                    username:'',
-                    email:'', 
-                    password:'',
-                })
-       
             
+           
         })
+        nav('/api/anusuchi_form')
+       
 
     }
-
+   
 
 return(
     <div className="container">
@@ -62,7 +59,7 @@ return(
                                 <input type="password" className="form-control"  value={formData.password} name="password" onChange={handleChange}/>
                             </div>
                             <div>
-                                <button type="submit" className="btn btn-primary">Register</button>
+                                <button type="submit"  className="btn btn-primary">Register</button>
                             </div>
                         </form>
                     </div>

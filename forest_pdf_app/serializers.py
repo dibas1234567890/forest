@@ -52,3 +52,8 @@ class UserSerializer(serializers.ModelSerializer):
             model = User
             fields = ('id', 'username', 'email', 'password')
 
+class LoginSerializer(serializers.Serializer):
+           username = serializers.CharField(required=True)
+           password = serializers.CharField(required=True)
+      
+

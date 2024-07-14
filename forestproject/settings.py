@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     "bootstrap5", 
     'rest_framework',
     'corsheaders',
-         'rest_framework_simplejwt.token_blacklist'
+         'rest_framework_simplejwt.token_blacklist',
+         'rest_framework.authtoken'
 ,
 
 
@@ -150,18 +151,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 CORS_ORIGIN_ALLOW_ALL = True
 
-# REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.AllowAny']} 
+# REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES':['rest_framework.permissions.IsAuthenticated']} 
 DATE_FORMAT = "Y-m-d"
 
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+
+CSRF_TRUSTED_ORIGINS = [
+    'http://127.0.0.1:3000',
+]
+
+REST_FRAMEWORK = {
+     'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+      ],
+}
+
 SIMPLE_JWT = {
      'ACCESS_TOKEN_LIFETIME': timedelta(minutes=10),
      'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
      'ROTATE_REFRESH_TOKENS': True,
      'BLACKLIST_AFTER_ROTATION': True
 }
-
-CSRF_TRUSTED_ORIGINS = [
-    'http://127.0.0.1:3000',
-]
