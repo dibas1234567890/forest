@@ -1,20 +1,20 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import SignatureCanvas from "react-signature-canvas";
 
 const SignatureCapture = ({ hiddenInputRef, setSignatureData }) => {
-  const sigCanvas = useRef({});
+  const sigCanvas = useRef(null);
 
   const handleClear = () => sigCanvas.current.clear();
 
-  const handleEnd = (e) => {  
-    e.stopPropagation(); 
-    
-    const signaturePoints = sigCanvas.current.toData();
-    console.log(signaturePoints)
-    setSignatureData(signaturePoints);
-    if (hiddenInputRef.current) {
-      hiddenInputRef.current.value = JSON.stringify(signaturePoints);
-    } 
+  const handleEnd = () => {
+    if (sigCanvas.current) {
+      const signaturePoints = sigCanvas.current.toData();
+      console.log(signaturePoints);
+      setSignatureData(signaturePoints);
+      if (hiddenInputRef && hiddenInputRef.current) {
+        hiddenInputRef.current.value = JSON.stringify(signaturePoints);
+      }
+    }
   };
 
   return (
@@ -25,7 +25,7 @@ const SignatureCapture = ({ hiddenInputRef, setSignatureData }) => {
         ref={sigCanvas}
         onEnd={handleEnd}
       />
-      <button onClick={handleClear}>Clear</button>
+      <button type="button" onClick={handleClear}>Clear</button>
     </div>
   );
 };

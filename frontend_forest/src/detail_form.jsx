@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "./axios_auth";
+import axios from 'axios';
 
 const DetailForm = () => {
     const token = localStorage.getItem('access_token');
-   
+
     const [formData, setFormData] = useState({
         wood_species: '',
         quantity: '',
@@ -14,7 +14,7 @@ const DetailForm = () => {
         remarks: '',
         anusuchi_cha_no: ''
     });
-    
+
     const [options, setOptions] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
@@ -32,42 +32,58 @@ const DetailForm = () => {
         }
     };
 
-    useEffect(() => {
-
-        if(token === null){                   
-            window.location.href = '/api/login'
-            
+    const getOptions = async () => {
+        const csrfToken = await getCsrfToken();
+        try {
+            const response = await axios.get('http://127.0.0.1:8000/api/anusuchi_form', {
+                headers: {
+                    'X-CSRFToken': csrfToken,
+                    'Authorization': `Bearer ${token}`
+                },
+                withCredentials: true
+            });
+            setOptions(response.data); // Set options state
+        } catch (error) {
+            console.error('Error fetching options:', error);
+            setError('Error fetching options');
         }
-        else{
-        
-        const fetchDetails = async () => {
-            setLoading(true);
-            const csrfToken = await getCsrfToken();
-            if (!csrfToken) return;
+    };
 
-            try {
-                const response = await axios.get('http://127.0.0.1:8000/api/detail_form', {
-                    headers: {
-                        'X-CSRFToken': csrfToken,
-                        'Authorization': `Bearer ${token}`
-                    },
-                    withCredentials: true
-                });
-                setOptions(response.data);  
-            } catch (error) {
-                console.error('Error fetching details:', error);
-                setError('Error fetching details');
-            } finally {
-                setLoading(false);
-            }
-        };
+    useEffect(() => {
+        if (!token) {
+            window.location.href = '/api/login';
+        } else {
+            const fetchDetails = async () => {
+                setLoading(true);
+                const csrfToken = await getCsrfToken();
+                if (!csrfToken) return;
 
-        fetchDetails();
- } }, [token]);
+                await getOptions(); // Fetch options
+
+                try {
+                    const response = await axios.get('http://127.0.0.1:8000/api/detail_form', {
+                        headers: {
+                            'X-CSRFToken': csrfToken,
+                            'Authorization': `Bearer ${token}`
+                        },
+                        withCredentials: true
+                    });
+                    // Handle fetched details if needed
+                } catch (error) {
+                    console.error('Error fetching details:', error);
+                    setError('Error fetching details');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchDetails();
+        }
+    }, [token]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const csrfToken = await getCsrfToken(); 
+        const csrfToken = await getCsrfToken();
 
         if (!csrfToken) return;
 
@@ -118,7 +134,8 @@ const DetailForm = () => {
                             <form className="form form-group" onSubmit={handleSubmit}>
                                 <div>
                                     <label className="form-label">Wood Species:</label>
-                                    <input className="form-control"
+                                    <input
+                                        className="form-control"
                                         type="text"
                                         name="wood_species"
                                         value={formData.wood_species}
@@ -128,7 +145,8 @@ const DetailForm = () => {
                                 </div>
                                 <div>
                                     <label>Quantity:</label>
-                                    <input className="form-control"
+                                    <input
+                                        className="form-control"
                                         type="text"
                                         name="quantity"
                                         value={formData.quantity}
@@ -138,7 +156,8 @@ const DetailForm = () => {
                                 </div>
                                 <div>
                                     <label>Dimension:</label>
-                                    <input className="form-control"
+                                    <input
+                                        className="form-control"
                                         type="text"
                                         name="dimension"
                                         value={formData.dimension}
@@ -148,7 +167,8 @@ const DetailForm = () => {
                                 </div>
                                 <div>
                                     <label>Total Amount:</label>
-                                    <input className="form-control"
+                                    <input
+                                        className="form-control"
                                         type="number"
                                         name="total_amount"
                                         value={formData.total_amount}
@@ -158,7 +178,8 @@ const DetailForm = () => {
                                 </div>
                                 <div>
                                     <label>Stamp Description:</label>
-                                    <input className="form-control"
+                                    <input
+                                        className="form-control"
                                         type="text"
                                         name="stamp_टाँचा_description"
                                         value={formData.stamp_टाँचा_description}
@@ -168,7 +189,8 @@ const DetailForm = () => {
                                 </div>
                                 <div>
                                     <label>Seal Description:</label>
-                                    <input className="form-control"
+                                    <input
+                                        className="form-control"
                                         type="text"
                                         name="seal_description"
                                         value={formData.seal_description}
@@ -178,7 +200,8 @@ const DetailForm = () => {
                                 </div>
                                 <div>
                                     <label>Remarks:</label>
-                                    <input className="form-control"
+                                    <input
+                                        className="form-control"
                                         type="text"
                                         name="remarks"
                                         value={formData.remarks}
@@ -188,15 +211,17 @@ const DetailForm = () => {
                                 </div>
                                 <div>
                                     <label>Anusuchi Form ID:</label>
-                                    <select className="form-select"
+                                    <select
+                                        className="form-select"
                                         name="anusuchi_cha_no"
                                         value={formData.anusuchi_cha_no}
                                         onChange={handleChange}
                                         required
                                     >
+                                        <option value="" disabled>Select Anusuchi Form</option>
                                         {options.map(option => (
                                             <option key={option.id} value={option.id}>
-                                                {option.anusuchi_cha_no}
+                                                {option.cha_no}
                                             </option>
                                         ))}
                                     </select>
@@ -205,7 +230,7 @@ const DetailForm = () => {
                                     <button type="submit" className="btn btn-primary">Submit</button>
                                 </div>
                             </form>
-                            {error && <p className="text-danger">{error}</p>} {/* Display error message if any */}
+                            {error && <p className="text-danger">{error}</p>}
                         </div>
                     </div>
                 </div>
