@@ -108,7 +108,7 @@ const Dashboard = () => {
                                     <td>{item.dimension || 'No dimension'}</td>
                                     <td>{item.total_amount || 'No total amount'}</td>
                                     <td>
-                                        <button onClick={downloadFile}>
+                                        <button className='btn btn-success' onClick={downloadFile}>
                                             PDF
                                         </button>
                                     </td>
