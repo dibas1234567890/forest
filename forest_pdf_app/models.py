@@ -83,11 +83,11 @@ class Details(models.Model):
 
     def __str__(self) -> str:
         return (
-            f"Wood Species: {self.wood_species}, "
-            f"Quantity: {self.quantity}, "
-            f"Dimension: {self.dimension}, "
-            f"Total Amount: {self.total_amount}, "
-            f"Stamp Description: {self.stamp_टाँचा_description}, "
-            f"Seal Description: {self.seal_description}, "
-            f"Remarks: {self.remarks}"
+            f"{self.wood_species}, "
+            f" {self.quantity}, "
+            f" {self.dimension}, "
+            f" {self.total_amount}, "
+            f"{self.stamp_टाँचा_description}, "
+            f" {self.seal_description}, "
+            f"{self.remarks}"
         )
