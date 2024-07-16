@@ -29,7 +29,7 @@ const App = () => {
                 <Route path="/api/register" element={<RegisterForm />} />
                 <Route path="/api/login" element={ isLoggedIn ? <Navigate to="/api/dashboard" /> : <LoginForm setIsLoggedIn={setIsLoggedIn} />} />
                 <Route path="api/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/api/login" />} /> 
-                <Route path="/" element={isLoggedIn ? <Navigate to="api/dashboard" /> : <Navigate to="/api/register" />} /> 
+                <Route path="/" element={isLoggedIn ? <Navigate to="api/dashboard" /> : <Navigate to="/api/login" />} /> 
             </Routes>
         </BrowserRouter>
     );

@@ -20,6 +20,36 @@ const Dashboard = () => {
         }
     };
 
+    const downloadFile = async () => {
+        const csrfToken = await getCsrfToken();
+        fetch('http://127.0.0.1:8000/api/pdf', {
+          method: 'GET',
+          headers: {
+             'X-CSRFToken': csrfToken,
+                        'Authorization': `Bearer ${token}`
+          },
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.blob(); 
+          })
+          .then(blob => {
+     
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', 'file.pdf'); 
+            document.body.appendChild(link);
+            link.click();
+            link.parentNode.removeChild(link); 
+          })
+          .catch(error => console.error('There was an error!', error));
+      };
+
+   
+
     useEffect(() => {
         
 
@@ -35,12 +65,11 @@ const Dashboard = () => {
 
                 
                 const response = await axios.get('http://127.0.0.1:8000/api/dashboard', {
-                    headers: {
-                        'X-CSRFToken': csrfToken,
+                   'X-CSRFToken': csrfToken,
 
                         'Authorization': `Bearer ${token}`,
-                    },
                 });
+                console.log("why is faze " + response.data);
                 setData(response.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -62,13 +91,53 @@ const Dashboard = () => {
     }
 
     return (
-        <div>
-            <h1>Dashboard</h1>
-            <ul>
-                {data.map(item => (
-                    <li key={item.id}>{item.name} - {item.value}</li> 
-                ))}
-            </ul>
+       <div className="container">
+        <div className="row">
+            <div className="col">
+            <h1 className='h1'>Dashboard</h1>
+
+            </div>
+        </div>
+        <div className="row">
+            <div className="col">
+          
+            <table className="table table-striped">
+            <thead className="thead-dark">
+
+        <tr>
+        <th scope="col"> Wood Species  </th>
+        <th scope="col"> Quantity  </th>
+        <th scope="col"> Dimension  </th>
+        <th scope="col"> Total Amount  </th>
+        <th scope="col"> Download  </th>
+        {/* <th> Wood Species  </th>
+        <th> Wood Species  </th> */}
+        </tr></thead>
+
+        <tbody>
+  {data.map(item => (
+    
+
+        <tr key={item.id}>
+      <td>{item.wood_species || 'No wood species'}</td>  
+      <td>{item.quantity || 'No quantity'}  </td>
+      <td>{item.dimension || 'No dimension'}  </td>
+      <td>      {item.total_amount || 'No total amount'}
+      </td>      
+      <td>      
+        <button onClick={downloadFile}>
+            pdf
+        </button>
+      </td>
+    </tr>
+
+
+    
+  ))} </tbody></table>
+
+
+        </div>
+            </div>
         </div>
     );
 };

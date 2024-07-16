@@ -1,4 +1,4 @@
-from django.http import JsonResponse
+from django.http import FileResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, HttpResponseRedirect
 from django.urls import reverse
 from rest_framework import status
@@ -20,8 +20,10 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.authentication import TokenAuthentication 
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate
+from fillpdf import fillpdfs
 
 
+from django.views import View
 
 
 @ensure_csrf_cookie
@@ -117,3 +119,53 @@ class DashBoardView(APIView):
         return Response(serializer.data)
 
 
+class PdfView(APIView): 
+    def get(self, request):
+        path = "Anusuchi14.pdf"
+        form_fields = list(fillpdfs.get_form_fields(path))
+        print(form_fields)
+
+        detail_instance = Details.objects.filter(anusuchi_cha_no__user=request.user.id).first()
+        anusuchi_related_id =  detail_instance.anusuchi_cha_no
+        model_instance = AnushuchiFourteen.objects.get(pk=anusuchi_related_id.id)
+        form_fields_mapping = {
+    'Text-division_forest_office': model_instance.division_forest_office,
+    'division_forest_office_location': model_instance.division_forest_office_location,
+    'Text-cha_no': model_instance.cha_no,
+    'Text-date': model_instance.date,
+    'Paragraph-applicant_name': model_instance.applicant_name,
+    'Text-sub_division_department-': model_instance.sub_division_department,
+    'Text-ghatgaddhi_place_name': model_instance.ghatgaddhi_place_name,
+    'Text-lot_number': model_instance.lot_number,
+    'Text-fiscal_year': model_instance.fiscal_year,
+    'Text-notice_published_date': model_instance.notice_published_date,
+    'Text-decision_date': model_instance.decision_date,
+    'Text-bid_price': model_instance.bid_price,
+    'Text-last_date_to_receive': model_instance.last_date_to_receive,
+    'Text-measured_date': model_instance.measured_date,
+    'Text-forest_department': model_instance.forest_department,
+    'Text-truck_number': model_instance.truck_number,
+    'Text-seal_number': model_instance.seal_number,
+    'Text-days_to_pick_up': model_instance.days_to_pick_up,
+    'Text-last_date_to_pick_up': model_instance.last_date_to_pick_up,
+    'Text-cc_division_forest_office': model_instance.cc_division_forest_office,
+    'Text-cc_sub_division_forest_office': model_instance.cc_sub_division_forest_office,
+    'Text-cc_finance_dept_division_forest_office': model_instance.cc_finance_dept_division_forest_office,
+    'Signature-DFO_officer_signature': model_instance.DFO_officer_signature,
+    'Paragraph-pC3l_tFD7A': None,  
+    'Paragraph-detail_1': None,  
+    'Paragraph-detail_2': None,  
+    'Paragraph-detail_3': None,  
+    'Paragraph-detail_4': None, 
+    'Paragraph-detail_5': None,  
+    'Paragraph-detail_6': None   
+}
+        
+        export_pdf = fillpdfs.write_fillable_pdf(path,
+                                                  "printable_form.pdf", data_dict= form_fields_mapping,flatten=True )
+
+        
+        file = open('printable_form.pdf', "rb")
+        return FileResponse(file, as_attachment=True)
+
+    

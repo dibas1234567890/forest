@@ -3,10 +3,17 @@ import { Link } from 'react-router-dom';
 
 const Navbar = ({ isLoggedIn, handleLogout }) => {
     return (
-        <nav  className='navbar navbar-expand-lg navbar-light bg-light'>
+        <div className="container">
+          <div className="row">
+            <div className="col">
+            <nav  className='navbar navbar-expand-lg navbar-light bg-light'>
+            
+
             <ul className='navbar-nav mr-auto'> 
+
                 {isLoggedIn ? (
                     <>
+                        <a class="navbar-brand" href="/">Home</a>
                         <li className='nav-item'><Link className='nav-link' to="/api/detail_form">Detail Form</Link></li>
                         <li className='nav-item'><Link className='nav-link' to="/api/anusuchi_form">Anusuchi Form</Link></li>
                         <li className='nav-item'><button className='btn btn-primary' onClick={handleLogout}>Logout</button></li>
@@ -19,6 +26,9 @@ const Navbar = ({ isLoggedIn, handleLogout }) => {
                 )}
             </ul>
         </nav>
+            </div>
+          </div>
+        </div>
     );
 };
 
