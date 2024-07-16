@@ -1,6 +1,3 @@
-Here’s the updated README with commit messages instead of hashes:
-
----
 
 # Project Title
 
