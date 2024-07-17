@@ -168,11 +168,84 @@ const AnusuchiForm = () => {
                                                     onChange={handleChange}
                                                 >
                                                     <option value="" selected>---------</option>
-                                                    <option value="1">Bhojpur</option>
-                                                    <option value="2">Dhankuta</option>
-                                                    <option value="3">Ilam</option>
-                                                    {/* Add other options here */}
-                                                    <option value="77">Kanchanpur</option>
+<option value="1">Bhojpur</option>
+<option value="2">Dhankuta</option>
+<option value="3">Ilam</option>
+<option value="4">Jhapa</option>
+<option value="5">Khotang</option>
+<option value="6">Morang</option>
+<option value="7">Okhaldhunga</option>
+<option value="8">Panchthar</option>
+<option value="9">Sankhuwasabha</option>
+<option value="10">Solukhumbu</option>
+<option value="11">Sunsari</option>
+<option value="12">Taplejung</option>
+<option value="13">Terhathum</option>
+<option value="14">Udayapur</option>
+<option value="15">Bara</option>
+<option value="16">Dhanusa</option>
+<option value="17">Mahottari</option>
+<option value="18">Parsa</option>
+<option value="19">Rautahat</option>
+<option value="20">Saptari</option>
+<option value="21">Sarlahi</option>
+<option value="22">Siraha</option>
+<option value="23">Bhaktapur</option>
+<option value="24">Chitwan</option>
+<option value="25">Dhading</option>
+<option value="26">Dolakha</option>
+<option value="27">Kathmandu</option>
+<option value="28">Kavrepalanchok</option>
+<option value="29">Lalitpur</option>
+<option value="30">Makawanpur</option>
+<option value="31">Nuwakot</option>
+<option value="32">Ramechhap</option>
+<option value="33">Rasuwa</option>
+<option value="34">Sindhuli</option>
+<option value="35">Sindhupalchok</option>
+<option value="36">Baglung</option>
+<option value="37">Gorkha</option>
+<option value="38">Kaski</option>
+<option value="39">Lamjung</option>
+<option value="40">Manang</option>
+<option value="41">Mustang</option>
+<option value="42">Myagdi</option>
+<option value="43">Nawalparasi East</option>
+<option value="44">Parbat</option>
+<option value="45">Syangja</option>
+<option value="46">Tanahu District</option>
+<option value="47">Arghakhanchi</option>
+<option value="48">Banke</option>
+<option value="49">Bardiya</option>
+<option value="50">Dang</option>
+<option value="51">Gulmi</option>
+<option value="52">Kapilvastu</option>
+<option value="53">Nawalparasi West</option>
+<option value="54">Palpa</option>
+<option value="55">Pyuthan</option>
+<option value="56">Rolpa</option>
+<option value="57">Rukum East</option>
+<option value="58">Rupandehi</option>
+<option value="59">Dailekh District</option>
+<option value="60">Dolpa District</option>
+<option value="61">Humla District</option>
+<option value="62">Jajarkot District</option>
+<option value="63">Jumla District</option>
+<option value="64">Kalikot District</option>
+<option value="65">Mugu District</option>
+<option value="66">Rukum West District</option>
+<option value="67">Salyan District</option>
+<option value="68">Surkhet District</option>
+<option value="69">Achham</option>
+<option value="70">Baitadi</option>
+<option value="71">Bajhang</option>
+<option value="72">Bajura</option>
+<option value="73">Dadeldhura</option>
+<option value="74">Darchula</option>
+<option value="75">Doti</option>
+<option value="76">Kailali</option>
+<option value="77">Kanchanpur</option>
+
                                                 </select>
                                             </td>
                                         </tr>
@@ -277,10 +350,29 @@ const AnusuchiForm = () => {
                                                     onChange={handleChange}
                                                 >
                                                     <option value="" selected>---------</option>
-                                                    <option value="70/71">70/71</option>
-                                                    <option value="71/72">71/72</option>
-                                                    {/* Add other options here */}
-                                                    <option value="90/91">90/91</option>
+<option value="71/72">71/72</option>
+<option value="72/73">72/73</option>
+<option value="73/74">73/74</option>
+<option value="74/75">74/75</option>
+<option value="75/76">75/76</option>
+<option value="76/77">76/77</option>
+<option value="77/78">77/78</option>
+<option value="78/79">78/79</option>
+<option value="79/80">79/80</option>
+<option value="80/81">80/81</option>
+<option value="81/82">81/82</option>
+<option value="82/83">82/83</option>
+<option value="83/84">83/84</option>
+<option value="84/85">84/85</option>
+<option value="85/86">85/86</option>
+<option value="86/87">86/87</option>
+<option value="87/88">87/88</option>
+<option value="88/89">88/89</option>
+<option value="89/90">89/90</option>
+<option value="90/91">90/91</option>
+<option value="91/92">91/92</option>
+<option value="92/93">92/93</option>
+
                                                 </select>
                                             </td>
                                         </tr>
