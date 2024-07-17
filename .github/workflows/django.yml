@@ -2,9 +2,9 @@ name: Django CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "dibas1234567890-patch-1" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "dibas1234567890-patch-1" ]
 
 jobs:
   build:
